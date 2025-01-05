@@ -14,38 +14,29 @@ namespace CinemaBoookingSystem.Model
         public static BindingList<Movie> Movies { get; private set; } = [];
         public static BindingList<Screen> Screens { get; private set; } = [];
         public static BindingList<Screening> Screenings { get; private set; } = [];
+        public static BindingList<Booking> Bookings { get; private set; } = [];
 
 
         static Database()
         {
-            //Customers.Add(new Customer("John", "Doe", "Prague", 1985));
-            //Customers.Add(new Customer("Peter", "Novak", "Kladno", 1995));
-            //Customers.Add(new Customer("Moe", "Sziszlak", "Springfield", 1975));
-            //Customers.Add(new Customer("Bart", "Simpson", "Springfield", 2014));
-            //Customers[3].Rented.Add(new CD("Black Album", "Metallica", "metal", 25));
-
-            //Stock.Add(new CD("Rosenrot", "Rammstein", "metal", 25));
-            //Stock.Add(new CD("Black Ice", "AC/DC", "rock", 25));
-            //Stock.Add(new CD("Blue Blood", "X Japan", "metal", 25));
-
-            //Stock.Add(new Dvd("Star Wars", "George Lucas", "scifi", 30));
-            //Stock.Add(new Dvd("Top Gun", "Tony Scott", "action", 30));
-            //Stock.Add(new Dvd("50 Shades of Grey", "Some Person", "erotic", 30, true));
             Deserialize();
         }
 
-        //public static bool Book(object cO, object dO)
-        //{
-        //    Customer c = (Customer)cO;
-        //    Disc d = (Disc)dO;
+        public static bool Book(Customer customer, Screening screening, Seat seat)
+        {
+            var b = new Booking()
+            {
+                Id = Guid.NewGuid(),
+                CustomerId = customer.Id,
+                BookingTime = DateTime.Now,
+                ScreeningId = screening.Id,
+                SeatId = seat.Id,
+            };
 
-        //    if (!c.Adult && (d is Dvd dvd) && dvd.Restricted) return false;
+            Bookings.Add(b);
 
-        //    c.Rented.Add(d);
-        //    Stock.Remove(d);
-
-        //    return true;
-        //}
+            return true;
+        }
 
         //public static void Return(object cO, object dO)
         //{

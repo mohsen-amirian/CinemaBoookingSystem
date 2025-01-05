@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CinemaBoookingSystem.Model
 {
-    internal class Booking
+    public class Booking
     {
         public Guid Id { get; set; }
         public Guid ScreeningId { get; set; }
