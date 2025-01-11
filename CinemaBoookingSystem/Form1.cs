@@ -22,6 +22,9 @@ namespace CinemaBoookingSystem
             dgvScreening.AutoGenerateColumns = false;
             dgvScreening.DataSource = screeningGridSource;
 
+            dgvBookings.AutoGenerateColumns = false;
+            dgvBookings.DataSource = Database.Bookings;
+
             lstbSeats.DataSource = seatsListSource;
         }
 

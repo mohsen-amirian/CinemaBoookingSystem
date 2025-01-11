@@ -27,7 +27,7 @@ namespace CinemaBoookingSystem.Model
                 {
                     Id = Guid.NewGuid(),
                     Screening = screening,
-                    BookingTime = DateTime.Now,
+                    BookingDate = DateTime.Now,
                     Customer = customer,
                     Seat = seat,
                 });

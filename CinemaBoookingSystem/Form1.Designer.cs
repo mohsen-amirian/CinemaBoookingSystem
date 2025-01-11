@@ -58,6 +58,7 @@
             Column14 = new DataGridViewTextBoxColumn();
             Column15 = new DataGridViewTextBoxColumn();
             Column16 = new DataGridViewTextBoxColumn();
+            Column17 = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvCustomers).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvMovies).BeginInit();
             tabControl1.SuspendLayout();
@@ -344,7 +345,7 @@
             dgvBookings.AllowUserToAddRows = false;
             dgvBookings.AllowUserToDeleteRows = false;
             dgvBookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBookings.Columns.AddRange(new DataGridViewColumn[] { Column12, Column13, Column14, Column15, Column16 });
+            dgvBookings.Columns.AddRange(new DataGridViewColumn[] { Column12, Column13, Column14, Column15, Column16, Column17 });
             dgvBookings.Location = new Point(99, 34);
             dgvBookings.Name = "dgvBookings";
             dgvBookings.ReadOnly = true;
@@ -395,12 +396,22 @@
             // Column16
             // 
             Column16.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column16.DataPropertyName = "Date";
-            Column16.HeaderText = "Date";
+            Column16.DataPropertyName = "ScreeningDate";
+            Column16.HeaderText = "Screening Date";
             Column16.MinimumWidth = 6;
             Column16.Name = "Column16";
             Column16.ReadOnly = true;
-            Column16.Width = 70;
+            Column16.Width = 139;
+            // 
+            // Column17
+            // 
+            Column17.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column17.DataPropertyName = "BookingDate";
+            Column17.HeaderText = "Booking Date";
+            Column17.MinimumWidth = 6;
+            Column17.Name = "Column17";
+            Column17.ReadOnly = true;
+            Column17.Width = 129;
             // 
             // Form1
             // 
@@ -456,5 +467,6 @@
         private DataGridViewTextBoxColumn Column14;
         private DataGridViewTextBoxColumn Column15;
         private DataGridViewTextBoxColumn Column16;
+        private DataGridViewTextBoxColumn Column17;
     }
 }
