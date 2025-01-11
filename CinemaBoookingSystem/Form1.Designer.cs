@@ -42,8 +42,9 @@
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             groupBox1 = new GroupBox();
-            dgvScreen = new DataGridView();
+            dgvScreening = new DataGridView();
             Column10 = new DataGridViewTextBoxColumn();
+            Column11 = new DataGridViewTextBoxColumn();
             btnBook = new Button();
             label3 = new Label();
             lstbSeats = new ListBox();
@@ -51,12 +52,20 @@
             label2 = new Label();
             label1 = new Label();
             tabPage2 = new TabPage();
+            dgvBookings = new DataGridView();
+            Column12 = new DataGridViewTextBoxColumn();
+            Column13 = new DataGridViewTextBoxColumn();
+            Column14 = new DataGridViewTextBoxColumn();
+            Column15 = new DataGridViewTextBoxColumn();
+            Column16 = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvCustomers).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvMovies).BeginInit();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvScreen).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvScreening).BeginInit();
+            tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvBookings).BeginInit();
             SuspendLayout();
             // 
             // dgvCustomers
@@ -75,6 +84,7 @@
             dgvCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCustomers.Size = new Size(773, 163);
             dgvCustomers.TabIndex = 0;
+            dgvCustomers.SelectionChanged += dgvCustomers_SelectionChanged;
             // 
             // Column1
             // 
@@ -212,7 +222,7 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(dgvScreen);
+            groupBox1.Controls.Add(dgvScreening);
             groupBox1.Controls.Add(btnBook);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(lstbSeats);
@@ -224,37 +234,47 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "groupBox1";
             // 
-            // dgvScreen
+            // dgvScreening
             // 
-            dgvScreen.AllowUserToAddRows = false;
-            dgvScreen.AllowUserToDeleteRows = false;
-            dgvScreen.AllowUserToResizeColumns = false;
-            dgvScreen.AllowUserToResizeRows = false;
-            dgvScreen.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvScreen.Columns.AddRange(new DataGridViewColumn[] { Column10 });
-            dgvScreen.Location = new Point(14, 78);
-            dgvScreen.MultiSelect = false;
-            dgvScreen.Name = "dgvScreen";
-            dgvScreen.ReadOnly = true;
-            dgvScreen.RowHeadersWidth = 51;
-            dgvScreen.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvScreen.Size = new Size(267, 163);
-            dgvScreen.TabIndex = 4;
-            dgvScreen.SelectionChanged += dgvScreen_SelectionChanged;
+            dgvScreening.AllowUserToAddRows = false;
+            dgvScreening.AllowUserToDeleteRows = false;
+            dgvScreening.AllowUserToResizeColumns = false;
+            dgvScreening.AllowUserToResizeRows = false;
+            dgvScreening.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvScreening.Columns.AddRange(new DataGridViewColumn[] { Column10, Column11 });
+            dgvScreening.Location = new Point(14, 78);
+            dgvScreening.MultiSelect = false;
+            dgvScreening.Name = "dgvScreening";
+            dgvScreening.ReadOnly = true;
+            dgvScreening.RowHeadersWidth = 51;
+            dgvScreening.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvScreening.Size = new Size(424, 163);
+            dgvScreening.TabIndex = 4;
+            dgvScreening.SelectionChanged += dgvScreening_SelectionChanged;
             // 
             // Column10
             // 
             Column10.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            Column10.DataPropertyName = "Name";
-            Column10.HeaderText = "Name";
+            Column10.DataPropertyName = "ScreenName";
+            Column10.HeaderText = "Screen Name";
             Column10.MinimumWidth = 6;
             Column10.Name = "Column10";
             Column10.ReadOnly = true;
-            Column10.Width = 78;
+            Column10.Width = 126;
+            // 
+            // Column11
+            // 
+            Column11.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column11.DataPropertyName = "DateTime";
+            Column11.HeaderText = "Time";
+            Column11.MinimumWidth = 6;
+            Column11.Name = "Column11";
+            Column11.ReadOnly = true;
+            Column11.Width = 71;
             // 
             // btnBook
             // 
-            btnBook.Location = new Point(642, 197);
+            btnBook.Location = new Point(968, 197);
             btnBook.Name = "btnBook";
             btnBook.Size = new Size(122, 44);
             btnBook.TabIndex = 11;
@@ -267,15 +287,15 @@
             label3.AutoSize = true;
             label3.Location = new Point(14, 39);
             label3.Name = "label3";
-            label3.Size = new Size(53, 20);
+            label3.Size = new Size(74, 20);
             label3.TabIndex = 5;
-            label3.Text = "Screen";
+            label3.Text = "Screening";
             // 
             // lstbSeats
             // 
             lstbSeats.DisplayMember = "Number";
             lstbSeats.FormattingEnabled = true;
-            lstbSeats.Location = new Point(397, 77);
+            lstbSeats.Location = new Point(685, 78);
             lstbSeats.Name = "lstbSeats";
             lstbSeats.Size = new Size(168, 164);
             lstbSeats.TabIndex = 10;
@@ -284,7 +304,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(397, 39);
+            label4.Location = new Point(685, 39);
             label4.Name = "label4";
             label4.Size = new Size(168, 20);
             label4.TabIndex = 7;
@@ -310,6 +330,7 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(dgvBookings);
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
@@ -317,6 +338,61 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Manage Bookings";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dgvBookings
+            // 
+            dgvBookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvBookings.Columns.AddRange(new DataGridViewColumn[] { Column12, Column13, Column14, Column15, Column16 });
+            dgvBookings.Location = new Point(99, 34);
+            dgvBookings.Name = "dgvBookings";
+            dgvBookings.RowHeadersWidth = 51;
+            dgvBookings.Size = new Size(960, 342);
+            dgvBookings.TabIndex = 0;
+            // 
+            // Column12
+            // 
+            Column12.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column12.DataPropertyName = "CustomerName";
+            Column12.HeaderText = "Customer";
+            Column12.MinimumWidth = 6;
+            Column12.Name = "Column12";
+            Column12.Width = 101;
+            // 
+            // Column13
+            // 
+            Column13.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column13.DataPropertyName = "MovieName";
+            Column13.HeaderText = "Movie";
+            Column13.MinimumWidth = 6;
+            Column13.Name = "Column13";
+            Column13.Width = 79;
+            // 
+            // Column14
+            // 
+            Column14.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column14.DataPropertyName = "ScreenName";
+            Column14.HeaderText = "Screen";
+            Column14.MinimumWidth = 6;
+            Column14.Name = "Column14";
+            Column14.Width = 82;
+            // 
+            // Column15
+            // 
+            Column15.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column15.DataPropertyName = "SeatNumber";
+            Column15.HeaderText = "Seat Number";
+            Column15.MinimumWidth = 6;
+            Column15.Name = "Column15";
+            Column15.Width = 125;
+            // 
+            // Column16
+            // 
+            Column16.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            Column16.DataPropertyName = "Date";
+            Column16.HeaderText = "Date";
+            Column16.MinimumWidth = 6;
+            Column16.Name = "Column16";
+            Column16.Width = 70;
             // 
             // Form1
             // 
@@ -326,6 +402,7 @@
             Controls.Add(tabControl1);
             Name = "Form1";
             Text = "Form1";
+            FormClosed += Form1_FormClosed;
             ((System.ComponentModel.ISupportInitialize)dgvCustomers).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvMovies).EndInit();
             tabControl1.ResumeLayout(false);
@@ -333,7 +410,9 @@
             tabPage1.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvScreen).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvScreening).EndInit();
+            tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvBookings).EndInit();
             ResumeLayout(false);
         }
 
@@ -348,7 +427,7 @@
         private TabPage tabPage2;
         private Label label4;
         private Label label3;
-        private DataGridView dgvScreen;
+        private DataGridView dgvScreening;
         private ListBox lstbSeats;
         private Button btnBook;
         private GroupBox groupBox1;
@@ -362,5 +441,12 @@
         private DataGridViewTextBoxColumn Column8;
         private DataGridViewTextBoxColumn Column9;
         private DataGridViewTextBoxColumn Column10;
+        private DataGridViewTextBoxColumn Column11;
+        private DataGridView dgvBookings;
+        private DataGridViewTextBoxColumn Column12;
+        private DataGridViewTextBoxColumn Column13;
+        private DataGridViewTextBoxColumn Column14;
+        private DataGridViewTextBoxColumn Column15;
+        private DataGridViewTextBoxColumn Column16;
     }
 }

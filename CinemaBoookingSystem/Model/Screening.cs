@@ -14,4 +14,9 @@ namespace CinemaBoookingSystem.Model
         public Guid MovieId { get; set; }
         public Guid ScreenId { get; set; }
     }
+
+    public class ScreeningViewModel: Screening
+    {
+        public string ScreenName { get; set; }
+    }
 }

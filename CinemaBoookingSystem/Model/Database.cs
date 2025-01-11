@@ -10,11 +10,11 @@ namespace CinemaBoookingSystem.Model
 {
     public static class Database
     {
-        public static BindingList<Customer> Customers { get; private set; } = [];
-        public static BindingList<Movie> Movies { get; private set; } = [];
-        public static BindingList<Screen> Screens { get; private set; } = [];
-        public static BindingList<Screening> Screenings { get; private set; } = [];
-        public static BindingList<Booking> Bookings { get; private set; } = [];
+        public static Customer[] Customers { get; private set; } = [];
+        public static Movie[] Movies { get; private set; } = [];
+        public static Screen[] Screens { get; private set; } = [];
+        public static Screening[] Screenings { get; private set; } = [];
+        public static List<Booking> Bookings { get; private set; } = [];
 
 
         static Database()
@@ -22,15 +22,15 @@ namespace CinemaBoookingSystem.Model
             Deserialize();
         }
 
-        public static bool Book(Customer customer, Screening screening, Seat seat)
+        public static bool Book(Guid customerId, Guid screeningId, Guid seatId)
         {
             var b = new Booking()
             {
                 Id = Guid.NewGuid(),
-                CustomerId = customer.Id,
+                CustomerId = customerId,
                 BookingTime = DateTime.Now,
-                ScreeningId = screening.Id,
-                SeatId = seat.Id,
+                ScreeningId = screeningId,
+                SeatId = seatId,
             };
 
             Bookings.Add(b);
@@ -49,7 +49,7 @@ namespace CinemaBoookingSystem.Model
 
         public static void Serialize()
         {
-            SerializeList(Customers, "customers.xml");
+            Serialize(Bookings, "bookings.xml");
         }
 
         public static void SerializeList<T>(BindingList<T> list, string file)
@@ -63,10 +63,13 @@ namespace CinemaBoookingSystem.Model
 
         public static void Deserialize()
         {
-            Customers = Deserialize<Customer>("Data/customers.xml");
-            Movies = Deserialize<Movie>("Data/movies.xml");
-            Screens = Deserialize<Screen>("Data/screens.xml");
-            Screenings = Deserialize<Screening>("Data/screenings.xml");
+            Customers = Deserialize<Customer[]>("Data/customers.xml");
+            Movies = Deserialize<Movie[]>("Data/movies.xml");
+            Screens = Deserialize<Screen[]>("Data/screens.xml");
+            Screenings = Deserialize<Screening[]>("Data/screenings.xml");
+
+            var tempBookings = Deserialize<List<Booking>>("Data/bookings.xml");
+            if (tempBookings != null && tempBookings.Count > 0) Bookings = tempBookings;
         }
 
         private static BindingList<Screening> GenerateScreeinings()
@@ -88,17 +91,17 @@ namespace CinemaBoookingSystem.Model
             return data;
         }
 
-        private static List<T> GetRandomElements<T>(BindingList<T> list)
+        private static List<T> GetRandomElements<T>(T[] list)
         {
             var random = new Random();
             var random2 = new Random();
-            var count = random2.Next(1, list.Count);
+            var count = random2.Next(1, list.Count());
             var result = new List<T>();
             var indices = new HashSet<int>();
 
             while (indices.Count < count)
             {
-                int index = random.Next(list.Count);
+                int index = random.Next(list.Count());
                 if (indices.Add(index))
                 {
                     result.Add(list[index]);
@@ -108,12 +111,21 @@ namespace CinemaBoookingSystem.Model
             return result;
         }
 
-        public static BindingList<T> Deserialize<T>(string file)
+        public static T Deserialize<T>(string file)
         {
             using (Stream s = File.Open(file, FileMode.Open))
             {
-                XmlSerializer x = new XmlSerializer(typeof(BindingList<T>));
-                return (BindingList<T>)x.Deserialize(s);
+                XmlSerializer x = new XmlSerializer(typeof(T));
+                return (T)x.Deserialize(s);
+            }
+        }
+
+        public static void Serialize<T>(T data, string fileName)
+        {
+            using (Stream s = File.Open(fileName, FileMode.Create))
+            {
+                XmlSerializer x = new XmlSerializer(data.GetType());
+                x.Serialize(s, data);
             }
         }
     }
