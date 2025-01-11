@@ -35,14 +35,74 @@ namespace CinemaBoookingSystem.Model
             return true;
         }
 
-        //public static void DeRegister(object cO, object dO)
-        //{
-        //    Customer c = (Customer)cO;
-        //    Disc d = (Disc)dO;
+        public static bool CancelBooking(Booking booking)
+        {
+            Bookings.Remove(booking);
 
-        //    Stock.Add(d);
-        //    c.Rented.Remove(d);
-        //}
+            return true;
+        }
+
+        public static bool CreateCustomer(string name, string lastName, int yearOfBirth, string email)
+        {
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(lastName))
+            {
+                return false;
+            }
+
+            if (yearOfBirth < 1900 || yearOfBirth > DateTime.Now.Year)
+            {
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(email) || !email.Contains("@"))
+            {
+                return false;
+            }
+
+
+            var newCustomer = new Customer
+            {
+                Id = Guid.NewGuid(),
+                Name = name,
+                LastName = lastName,
+                YearOfBirth = yearOfBirth,
+                Email = email
+            };
+
+
+            Customers.Add(newCustomer);
+
+            return true;
+        }
+
+        public static bool UpdateCustomer(Guid customerId, string name, string lastName, int yearOfBirth, string email)
+        {
+            var customer = Customers.Single(c => c.Id == customerId);
+            
+            customer.Name = name;
+            customer.LastName = lastName;
+            customer.YearOfBirth = yearOfBirth;
+            customer.Email = email;
+
+            return true;
+        }
+
+
+        public static bool DeleteCustomer(Guid customerId)
+        {
+            var customer = Customers.Single(c => c.Id == customerId);
+
+            Customers.Remove(customer);
+
+            var toRemoveBookings = Bookings.Where(b => b.Customer.Id == customer.Id).ToList();
+
+            foreach (var booking in toRemoveBookings)
+            {
+                Bookings.Remove(booking);
+            }
+
+            return true;
+        }
 
         public static void Serialize()
         {
@@ -70,6 +130,7 @@ namespace CinemaBoookingSystem.Model
             Screenings = Deserialize<BindingList<Screening>>("Data/screenings.xml");
 
             var tempBookings = Deserialize<BindingList<Booking>>("Data/bookings.xml");
+
             if (tempBookings != null && tempBookings.Count > 0) Bookings = tempBookings;
         }
 

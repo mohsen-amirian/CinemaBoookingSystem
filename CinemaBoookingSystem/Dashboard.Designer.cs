@@ -1,6 +1,6 @@
 ﻿namespace CinemaBoookingSystem
 {
-    partial class Form1
+    partial class Dashboard
     {
         /// <summary>
         ///  Required designer variable.
@@ -52,6 +52,7 @@
             label2 = new Label();
             label1 = new Label();
             tabPage2 = new TabPage();
+            label5 = new Label();
             btnCancelBooking = new Button();
             dgvBookings = new DataGridView();
             Column12 = new DataGridViewTextBoxColumn();
@@ -60,6 +61,36 @@
             Column15 = new DataGridViewTextBoxColumn();
             Column16 = new DataGridViewTextBoxColumn();
             Column17 = new DataGridViewTextBoxColumn();
+            tabPage3 = new TabPage();
+            dgvManageCustomers = new DataGridView();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            label6 = new Label();
+            groupBox3 = new GroupBox();
+            label11 = new Label();
+            txtNewCustomerYOB = new TextBox();
+            label12 = new Label();
+            txtNewCustomerEmail = new TextBox();
+            label13 = new Label();
+            txtNewCustomerLastName = new TextBox();
+            label14 = new Label();
+            txtNewCustomerName = new TextBox();
+            btnCreateNewCustomer = new Button();
+            gbCustomerEdit = new GroupBox();
+            btnCustomerEditCancel = new Button();
+            label10 = new Label();
+            txtEditCustomerYOB = new TextBox();
+            label9 = new Label();
+            txtEditCustomerEmail = new TextBox();
+            label8 = new Label();
+            txtEditCustomerLastName = new TextBox();
+            label7 = new Label();
+            txtEditCustomerName = new TextBox();
+            btnCustomerEditSave = new Button();
+            btnDeleteCustomer = new Button();
+            btnEditCustomer = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvCustomers).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvMovies).BeginInit();
             tabControl1.SuspendLayout();
@@ -68,6 +99,10 @@
             ((System.ComponentModel.ISupportInitialize)dgvScreening).BeginInit();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvBookings).BeginInit();
+            tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvManageCustomers).BeginInit();
+            groupBox3.SuspendLayout();
+            gbCustomerEdit.SuspendLayout();
             SuspendLayout();
             // 
             // dgvCustomers
@@ -78,13 +113,13 @@
             dgvCustomers.AllowUserToResizeRows = false;
             dgvCustomers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCustomers.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4 });
-            dgvCustomers.Location = new Point(125, 39);
+            dgvCustomers.Location = new Point(97, 12);
             dgvCustomers.MultiSelect = false;
             dgvCustomers.Name = "dgvCustomers";
             dgvCustomers.ReadOnly = true;
             dgvCustomers.RowHeadersWidth = 51;
             dgvCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvCustomers.Size = new Size(773, 163);
+            dgvCustomers.Size = new Size(797, 190);
             dgvCustomers.TabIndex = 0;
             dgvCustomers.SelectionChanged += dgvCustomers_SelectionChanged;
             // 
@@ -136,13 +171,13 @@
             dgvMovies.AllowUserToResizeRows = false;
             dgvMovies.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvMovies.Columns.AddRange(new DataGridViewColumn[] { Column5, Column6, Column7, Column8, Column9 });
-            dgvMovies.Location = new Point(125, 219);
+            dgvMovies.Location = new Point(97, 219);
             dgvMovies.MultiSelect = false;
             dgvMovies.Name = "dgvMovies";
             dgvMovies.ReadOnly = true;
             dgvMovies.RowHeadersWidth = 51;
             dgvMovies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvMovies.Size = new Size(773, 163);
+            dgvMovies.Size = new Size(797, 178);
             dgvMovies.TabIndex = 1;
             dgvMovies.SelectionChanged += dgvMovies_SelectionChanged;
             // 
@@ -200,11 +235,12 @@
             // 
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPage3);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1384, 776);
+            tabControl1.Size = new Size(955, 803);
             tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -217,7 +253,7 @@
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1376, 743);
+            tabPage1.Size = new Size(947, 770);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Reservation";
             tabPage1.UseVisualStyleBackColor = true;
@@ -229,12 +265,12 @@
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(lstbSeats);
             groupBox1.Controls.Add(label4);
-            groupBox1.Location = new Point(17, 427);
+            groupBox1.Location = new Point(97, 417);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1160, 262);
+            groupBox1.Size = new Size(797, 335);
             groupBox1.TabIndex = 12;
             groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
+            groupBox1.Text = "Book Ticket";
             // 
             // dgvScreening
             // 
@@ -250,7 +286,7 @@
             dgvScreening.ReadOnly = true;
             dgvScreening.RowHeadersWidth = 51;
             dgvScreening.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvScreening.Size = new Size(424, 163);
+            dgvScreening.Size = new Size(377, 239);
             dgvScreening.TabIndex = 4;
             dgvScreening.SelectionChanged += dgvScreening_SelectionChanged;
             // 
@@ -276,7 +312,7 @@
             // 
             // btnBook
             // 
-            btnBook.Location = new Point(968, 197);
+            btnBook.Location = new Point(548, 273);
             btnBook.Name = "btnBook";
             btnBook.Size = new Size(122, 44);
             btnBook.TabIndex = 11;
@@ -297,7 +333,7 @@
             // 
             lstbSeats.DisplayMember = "Number";
             lstbSeats.FormattingEnabled = true;
-            lstbSeats.Location = new Point(685, 78);
+            lstbSeats.Location = new Point(502, 78);
             lstbSeats.Name = "lstbSeats";
             lstbSeats.Size = new Size(168, 164);
             lstbSeats.TabIndex = 10;
@@ -306,7 +342,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(685, 39);
+            label4.Location = new Point(502, 39);
             label4.Name = "label4";
             label4.Size = new Size(168, 20);
             label4.TabIndex = 7;
@@ -317,14 +353,14 @@
             label2.AutoSize = true;
             label2.Location = new Point(17, 219);
             label2.Name = "label2";
-            label2.Size = new Size(50, 20);
+            label2.Size = new Size(56, 20);
             label2.TabIndex = 3;
-            label2.Text = "Movie";
+            label2.Text = "Movies";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(6, 39);
+            label1.Location = new Point(8, 12);
             label1.Name = "label1";
             label1.Size = new Size(78, 20);
             label1.TabIndex = 2;
@@ -332,21 +368,31 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(label5);
             tabPage2.Controls.Add(btnCancelBooking);
             tabPage2.Controls.Add(dgvBookings);
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1376, 743);
+            tabPage2.Size = new Size(947, 770);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Manage Bookings";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(33, 30);
+            label5.Name = "label5";
+            label5.Size = new Size(70, 20);
+            label5.TabIndex = 3;
+            label5.Text = "Bookings";
+            // 
             // btnCancelBooking
             // 
-            btnCancelBooking.Location = new Point(99, 463);
+            btnCancelBooking.Location = new Point(737, 703);
             btnCancelBooking.Name = "btnCancelBooking";
-            btnCancelBooking.Size = new Size(165, 29);
+            btnCancelBooking.Size = new Size(165, 43);
             btnCancelBooking.TabIndex = 1;
             btnCancelBooking.Text = "Cancel Booking";
             btnCancelBooking.UseVisualStyleBackColor = true;
@@ -360,13 +406,13 @@
             dgvBookings.AllowUserToResizeRows = false;
             dgvBookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvBookings.Columns.AddRange(new DataGridViewColumn[] { Column12, Column13, Column14, Column15, Column16, Column17 });
-            dgvBookings.Location = new Point(99, 34);
+            dgvBookings.Location = new Point(33, 69);
             dgvBookings.MultiSelect = false;
             dgvBookings.Name = "dgvBookings";
             dgvBookings.ReadOnly = true;
             dgvBookings.RowHeadersWidth = 51;
             dgvBookings.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvBookings.Size = new Size(960, 342);
+            dgvBookings.Size = new Size(869, 610);
             dgvBookings.TabIndex = 0;
             // 
             // Column12
@@ -429,14 +475,312 @@
             Column17.ReadOnly = true;
             Column17.Width = 129;
             // 
-            // Form1
+            // tabPage3
+            // 
+            tabPage3.Controls.Add(dgvManageCustomers);
+            tabPage3.Controls.Add(label6);
+            tabPage3.Controls.Add(groupBox3);
+            tabPage3.Controls.Add(gbCustomerEdit);
+            tabPage3.Controls.Add(btnDeleteCustomer);
+            tabPage3.Controls.Add(btnEditCustomer);
+            tabPage3.Location = new Point(4, 29);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(947, 770);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "Manage Customers";
+            tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // dgvManageCustomers
+            // 
+            dgvManageCustomers.AllowUserToAddRows = false;
+            dgvManageCustomers.AllowUserToDeleteRows = false;
+            dgvManageCustomers.AllowUserToResizeColumns = false;
+            dgvManageCustomers.AllowUserToResizeRows = false;
+            dgvManageCustomers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvManageCustomers.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4 });
+            dgvManageCustomers.Location = new Point(33, 45);
+            dgvManageCustomers.MultiSelect = false;
+            dgvManageCustomers.Name = "dgvManageCustomers";
+            dgvManageCustomers.ReadOnly = true;
+            dgvManageCustomers.RowHeadersWidth = 51;
+            dgvManageCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvManageCustomers.Size = new Size(874, 338);
+            dgvManageCustomers.TabIndex = 6;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            dataGridViewTextBoxColumn1.HeaderText = "First Name";
+            dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
+            dataGridViewTextBoxColumn1.Width = 109;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn2.DataPropertyName = "LastName";
+            dataGridViewTextBoxColumn2.HeaderText = "Last Name";
+            dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.ReadOnly = true;
+            dataGridViewTextBoxColumn2.Width = 108;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn3.DataPropertyName = "YearOfBirth";
+            dataGridViewTextBoxColumn3.HeaderText = "YearOfBirth";
+            dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.ReadOnly = true;
+            dataGridViewTextBoxColumn3.Width = 113;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewTextBoxColumn4.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewTextBoxColumn4.DataPropertyName = "Email";
+            dataGridViewTextBoxColumn4.HeaderText = "Email";
+            dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            dataGridViewTextBoxColumn4.ReadOnly = true;
+            dataGridViewTextBoxColumn4.Width = 75;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(32, 12);
+            label6.Name = "label6";
+            label6.Size = new Size(78, 20);
+            label6.TabIndex = 5;
+            label6.Text = "Customers";
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(label11);
+            groupBox3.Controls.Add(txtNewCustomerYOB);
+            groupBox3.Controls.Add(label12);
+            groupBox3.Controls.Add(txtNewCustomerEmail);
+            groupBox3.Controls.Add(label13);
+            groupBox3.Controls.Add(txtNewCustomerLastName);
+            groupBox3.Controls.Add(label14);
+            groupBox3.Controls.Add(txtNewCustomerName);
+            groupBox3.Controls.Add(btnCreateNewCustomer);
+            groupBox3.Location = new Point(507, 439);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(400, 323);
+            groupBox3.TabIndex = 4;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Create New Customer";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(43, 215);
+            label11.Name = "label11";
+            label11.Size = new Size(90, 20);
+            label11.TabIndex = 21;
+            label11.Text = "Year of Birth";
+            // 
+            // txtNewCustomerYOB
+            // 
+            txtNewCustomerYOB.Location = new Point(152, 211);
+            txtNewCustomerYOB.Name = "txtNewCustomerYOB";
+            txtNewCustomerYOB.Size = new Size(94, 27);
+            txtNewCustomerYOB.TabIndex = 20;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(43, 156);
+            label12.Name = "label12";
+            label12.Size = new Size(46, 20);
+            label12.TabIndex = 19;
+            label12.Text = "Email";
+            // 
+            // txtNewCustomerEmail
+            // 
+            txtNewCustomerEmail.Location = new Point(152, 153);
+            txtNewCustomerEmail.Name = "txtNewCustomerEmail";
+            txtNewCustomerEmail.Size = new Size(206, 27);
+            txtNewCustomerEmail.TabIndex = 18;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(43, 99);
+            label13.Name = "label13";
+            label13.Size = new Size(79, 20);
+            label13.TabIndex = 17;
+            label13.Text = "Last Name";
+            // 
+            // txtNewCustomerLastName
+            // 
+            txtNewCustomerLastName.Location = new Point(152, 96);
+            txtNewCustomerLastName.Name = "txtNewCustomerLastName";
+            txtNewCustomerLastName.Size = new Size(206, 27);
+            txtNewCustomerLastName.TabIndex = 16;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(43, 48);
+            label14.Name = "label14";
+            label14.Size = new Size(49, 20);
+            label14.TabIndex = 15;
+            label14.Text = "Name";
+            // 
+            // txtNewCustomerName
+            // 
+            txtNewCustomerName.Location = new Point(152, 45);
+            txtNewCustomerName.Name = "txtNewCustomerName";
+            txtNewCustomerName.Size = new Size(206, 27);
+            txtNewCustomerName.TabIndex = 14;
+            // 
+            // btnCreateNewCustomer
+            // 
+            btnCreateNewCustomer.Location = new Point(152, 278);
+            btnCreateNewCustomer.Name = "btnCreateNewCustomer";
+            btnCreateNewCustomer.Size = new Size(94, 29);
+            btnCreateNewCustomer.TabIndex = 2;
+            btnCreateNewCustomer.Text = "Create";
+            btnCreateNewCustomer.UseVisualStyleBackColor = true;
+            btnCreateNewCustomer.Click += btnCreateNewCustomer_Click;
+            // 
+            // gbCustomerEdit
+            // 
+            gbCustomerEdit.Controls.Add(btnCustomerEditCancel);
+            gbCustomerEdit.Controls.Add(label10);
+            gbCustomerEdit.Controls.Add(txtEditCustomerYOB);
+            gbCustomerEdit.Controls.Add(label9);
+            gbCustomerEdit.Controls.Add(txtEditCustomerEmail);
+            gbCustomerEdit.Controls.Add(label8);
+            gbCustomerEdit.Controls.Add(txtEditCustomerLastName);
+            gbCustomerEdit.Controls.Add(label7);
+            gbCustomerEdit.Controls.Add(txtEditCustomerName);
+            gbCustomerEdit.Controls.Add(btnCustomerEditSave);
+            gbCustomerEdit.Enabled = false;
+            gbCustomerEdit.Location = new Point(32, 439);
+            gbCustomerEdit.Name = "gbCustomerEdit";
+            gbCustomerEdit.Size = new Size(400, 323);
+            gbCustomerEdit.TabIndex = 3;
+            gbCustomerEdit.TabStop = false;
+            gbCustomerEdit.Text = "Edit";
+            // 
+            // btnCustomerEditCancel
+            // 
+            btnCustomerEditCancel.Location = new Point(261, 278);
+            btnCustomerEditCancel.Name = "btnCustomerEditCancel";
+            btnCustomerEditCancel.Size = new Size(94, 29);
+            btnCustomerEditCancel.TabIndex = 13;
+            btnCustomerEditCancel.Text = "Cancel";
+            btnCustomerEditCancel.UseVisualStyleBackColor = true;
+            btnCustomerEditCancel.Click += btnCustomerEditCancel_Click;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(40, 211);
+            label10.Name = "label10";
+            label10.Size = new Size(90, 20);
+            label10.TabIndex = 12;
+            label10.Text = "Year of Birth";
+            // 
+            // txtEditCustomerYOB
+            // 
+            txtEditCustomerYOB.Location = new Point(149, 207);
+            txtEditCustomerYOB.Name = "txtEditCustomerYOB";
+            txtEditCustomerYOB.Size = new Size(94, 27);
+            txtEditCustomerYOB.TabIndex = 11;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(40, 152);
+            label9.Name = "label9";
+            label9.Size = new Size(46, 20);
+            label9.TabIndex = 10;
+            label9.Text = "Email";
+            // 
+            // txtEditCustomerEmail
+            // 
+            txtEditCustomerEmail.Location = new Point(149, 149);
+            txtEditCustomerEmail.Name = "txtEditCustomerEmail";
+            txtEditCustomerEmail.Size = new Size(206, 27);
+            txtEditCustomerEmail.TabIndex = 9;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(40, 95);
+            label8.Name = "label8";
+            label8.Size = new Size(79, 20);
+            label8.TabIndex = 8;
+            label8.Text = "Last Name";
+            // 
+            // txtEditCustomerLastName
+            // 
+            txtEditCustomerLastName.Location = new Point(149, 92);
+            txtEditCustomerLastName.Name = "txtEditCustomerLastName";
+            txtEditCustomerLastName.Size = new Size(206, 27);
+            txtEditCustomerLastName.TabIndex = 7;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(40, 44);
+            label7.Name = "label7";
+            label7.Size = new Size(49, 20);
+            label7.TabIndex = 6;
+            label7.Text = "Name";
+            // 
+            // txtEditCustomerName
+            // 
+            txtEditCustomerName.Location = new Point(149, 41);
+            txtEditCustomerName.Name = "txtEditCustomerName";
+            txtEditCustomerName.Size = new Size(206, 27);
+            txtEditCustomerName.TabIndex = 4;
+            // 
+            // btnCustomerEditSave
+            // 
+            btnCustomerEditSave.Location = new Point(149, 278);
+            btnCustomerEditSave.Name = "btnCustomerEditSave";
+            btnCustomerEditSave.Size = new Size(94, 29);
+            btnCustomerEditSave.TabIndex = 3;
+            btnCustomerEditSave.Text = "Save";
+            btnCustomerEditSave.UseVisualStyleBackColor = true;
+            btnCustomerEditSave.Click += btnCustomerEditSave_Click;
+            // 
+            // btnDeleteCustomer
+            // 
+            btnDeleteCustomer.Location = new Point(149, 389);
+            btnDeleteCustomer.Name = "btnDeleteCustomer";
+            btnDeleteCustomer.Size = new Size(94, 29);
+            btnDeleteCustomer.TabIndex = 2;
+            btnDeleteCustomer.Text = "Delete";
+            btnDeleteCustomer.UseVisualStyleBackColor = true;
+            btnDeleteCustomer.Click += btnDeleteCustomer_Click;
+            // 
+            // btnEditCustomer
+            // 
+            btnEditCustomer.Location = new Point(32, 389);
+            btnEditCustomer.Name = "btnEditCustomer";
+            btnEditCustomer.Size = new Size(94, 29);
+            btnEditCustomer.TabIndex = 1;
+            btnEditCustomer.Text = "Edit";
+            btnEditCustomer.UseVisualStyleBackColor = true;
+            btnEditCustomer.Click += btnEditCustomer_Click;
+            // 
+            // Dashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1384, 776);
+            ClientSize = new Size(955, 803);
             Controls.Add(tabControl1);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "Dashboard";
+            Text = "Cinema Booking Dashboard";
             FormClosed += Form1_FormClosed;
             ((System.ComponentModel.ISupportInitialize)dgvCustomers).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvMovies).EndInit();
@@ -447,7 +791,15 @@
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvScreening).EndInit();
             tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvBookings).EndInit();
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvManageCustomers).EndInit();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            gbCustomerEdit.ResumeLayout(false);
+            gbCustomerEdit.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -485,5 +837,36 @@
         private DataGridViewTextBoxColumn Column16;
         private DataGridViewTextBoxColumn Column17;
         private Button btnCancelBooking;
+        private Label label5;
+        private TabPage tabPage3;
+        private GroupBox groupBox3;
+        private Button btnCreateNewCustomer;
+        private GroupBox gbCustomerEdit;
+        private Button btnCustomerEditSave;
+        private Button btnDeleteCustomer;
+        private Button btnEditCustomer;
+        private Label label6;
+        private Label label8;
+        private TextBox txtEditCustomerLastName;
+        private Label label7;
+        private TextBox txtEditCustomerName;
+        private Label label11;
+        private TextBox txtNewCustomerYOB;
+        private Label label12;
+        private TextBox txtNewCustomerEmail;
+        private Label label13;
+        private TextBox txtNewCustomerLastName;
+        private Label label14;
+        private TextBox txtNewCustomerName;
+        private Label label10;
+        private TextBox txtEditCustomerYOB;
+        private Label label9;
+        private TextBox txtEditCustomerEmail;
+        private DataGridView dgvManageCustomers;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private Button btnCustomerEditCancel;
     }
 }
