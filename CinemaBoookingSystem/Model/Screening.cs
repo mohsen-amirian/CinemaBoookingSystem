@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace CinemaBoookingSystem.Model
 {
@@ -11,12 +12,10 @@ namespace CinemaBoookingSystem.Model
         public Guid Id { get; set; }
         public DateTime DateTime { get; set; }
 
-        public Guid MovieId { get; set; }
-        public Guid ScreenId { get; set; }
-    }
+        public Movie Movie { get; set; }
+        public Screen Screen { get; set; }
 
-    public class ScreeningViewModel: Screening
-    {
-        public string ScreenName { get; set; }
+        [XmlIgnore]
+        public string ScreenName => Screen.Name;
     }
 }

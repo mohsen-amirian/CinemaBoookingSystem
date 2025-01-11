@@ -341,10 +341,13 @@
             // 
             // dgvBookings
             // 
+            dgvBookings.AllowUserToAddRows = false;
+            dgvBookings.AllowUserToDeleteRows = false;
             dgvBookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvBookings.Columns.AddRange(new DataGridViewColumn[] { Column12, Column13, Column14, Column15, Column16 });
             dgvBookings.Location = new Point(99, 34);
             dgvBookings.Name = "dgvBookings";
+            dgvBookings.ReadOnly = true;
             dgvBookings.RowHeadersWidth = 51;
             dgvBookings.Size = new Size(960, 342);
             dgvBookings.TabIndex = 0;
@@ -356,6 +359,7 @@
             Column12.HeaderText = "Customer";
             Column12.MinimumWidth = 6;
             Column12.Name = "Column12";
+            Column12.ReadOnly = true;
             Column12.Width = 101;
             // 
             // Column13
@@ -365,6 +369,7 @@
             Column13.HeaderText = "Movie";
             Column13.MinimumWidth = 6;
             Column13.Name = "Column13";
+            Column13.ReadOnly = true;
             Column13.Width = 79;
             // 
             // Column14
@@ -374,6 +379,7 @@
             Column14.HeaderText = "Screen";
             Column14.MinimumWidth = 6;
             Column14.Name = "Column14";
+            Column14.ReadOnly = true;
             Column14.Width = 82;
             // 
             // Column15
@@ -383,6 +389,7 @@
             Column15.HeaderText = "Seat Number";
             Column15.MinimumWidth = 6;
             Column15.Name = "Column15";
+            Column15.ReadOnly = true;
             Column15.Width = 125;
             // 
             // Column16
@@ -392,6 +399,7 @@
             Column16.HeaderText = "Date";
             Column16.MinimumWidth = 6;
             Column16.Name = "Column16";
+            Column16.ReadOnly = true;
             Column16.Width = 70;
             // 
             // Form1

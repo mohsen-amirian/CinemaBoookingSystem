@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace CinemaBoookingSystem.Model
 {
-    public class Booking
+    public class Booking()
     {
-        public Guid Id { get; set; }
-        public Guid ScreeningId { get; set; }
-
-        public Guid CustomerId { get; set; }
-        public Guid SeatId { get; set; }
-
-        public DateTime BookingTime { get; set; }
+        public Guid Id { get; set; } 
+        public Customer Customer { get; set; } 
+        public Screening Screening { get; set; } 
+        public Seat Seat { get; set; } 
+        public DateTime BookingTime { get; set; } 
     }
 }

@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace CinemaBoookingSystem.Model
 {
-    public class Screen
+    public class Screen()
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-
-        public List<Seat> Seats { get; set; } = [];
+        public Guid Id { get; set; } 
+        public string Name { get; set; } 
+        public Seat[] Seats { get; set; } 
     }
 }

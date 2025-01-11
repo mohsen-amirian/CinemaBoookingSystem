@@ -1,44 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CinemaBoookingSystem.Data;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace CinemaBoookingSystem.Model
 {
     public static class Database
     {
-        public static Customer[] Customers { get; private set; } = [];
-        public static Movie[] Movies { get; private set; } = [];
+        public static BindingList<Customer> Customers { get; private set; } = [];
+        public static BindingList<Movie> Movies { get; private set; } = [];
         public static Screen[] Screens { get; private set; } = [];
-        public static Screening[] Screenings { get; private set; } = [];
-        public static List<Booking> Bookings { get; private set; } = [];
+        public static BindingList<Screening> Screenings { get; private set; } = [];
+        public static BindingList<Booking> Bookings { get; private set; } = [];
 
 
         static Database()
         {
-            Deserialize();
+            DeserializeFromFile();
+
+            GenerateDataIfEmpty();
         }
 
-        public static bool Book(Guid customerId, Guid screeningId, Guid seatId)
+        public static bool Book(Customer customer, Screening screening, Seat seat)
         {
-            var b = new Booking()
-            {
-                Id = Guid.NewGuid(),
-                CustomerId = customerId,
-                BookingTime = DateTime.Now,
-                ScreeningId = screeningId,
-                SeatId = seatId,
-            };
-
-            Bookings.Add(b);
+            Bookings.Add(
+                new Booking()
+                {
+                    Id = Guid.NewGuid(),
+                    Screening = screening,
+                    BookingTime = DateTime.Now,
+                    Customer = customer,
+                    Seat = seat,
+                });
 
             return true;
         }
 
-        //public static void Return(object cO, object dO)
+        //public static void DeRegister(object cO, object dO)
         //{
         //    Customer c = (Customer)cO;
         //    Disc d = (Disc)dO;
@@ -49,7 +46,11 @@ namespace CinemaBoookingSystem.Model
 
         public static void Serialize()
         {
-            Serialize(Bookings, "bookings.xml");
+            Serialize(Customers, "Data/customers.xml");
+            Serialize(Movies, "Data/movies.xml");
+            Serialize(Screens, "Data/screens.xml");
+            Serialize(Screenings, "Data/screenings.xml");
+            Serialize(Bookings, "Data/bookings.xml");
         }
 
         public static void SerializeList<T>(BindingList<T> list, string file)
@@ -61,72 +62,45 @@ namespace CinemaBoookingSystem.Model
             }
         }
 
-        public static void Deserialize()
+        public static void DeserializeFromFile()
         {
-            Customers = Deserialize<Customer[]>("Data/customers.xml");
-            Movies = Deserialize<Movie[]>("Data/movies.xml");
+            Customers = Deserialize<BindingList<Customer>>("Data/customers.xml");
+            Movies = Deserialize<BindingList<Movie>>("Data/movies.xml");
             Screens = Deserialize<Screen[]>("Data/screens.xml");
-            Screenings = Deserialize<Screening[]>("Data/screenings.xml");
+            Screenings = Deserialize<BindingList<Screening>>("Data/screenings.xml");
 
-            var tempBookings = Deserialize<List<Booking>>("Data/bookings.xml");
+            var tempBookings = Deserialize<BindingList<Booking>>("Data/bookings.xml");
             if (tempBookings != null && tempBookings.Count > 0) Bookings = tempBookings;
         }
 
-        private static BindingList<Screening> GenerateScreeinings()
+        public static void GenerateDataIfEmpty()
         {
-            var random = new Random();
-            var data = new BindingList<Screening>();
-            foreach (var screen in Screens)
-            {
-                var selectedMovies = GetRandomElements(Movies);
-                foreach (var movie in selectedMovies)
-                {
-                    data.Add(new Screening() { 
-                        Id = Guid.NewGuid(),
-                        MovieId = movie.Id,
-                        ScreenId = screen.Id,
-                        DateTime = DateTime.Now.AddDays(random.Next(20)) });
-                }
-            }
-            return data;
+            if (!Customers.Any())
+                Customers = new BindingList<Customer>(DataGenerator.GenerateCustomers(10));
+
+            if (!Movies.Any())
+                Movies = new BindingList<Movie>(DataGenerator.GenerateMovies());
+
+            if (!Screens.Any())
+                Screens = DataGenerator.GenerateScreens();
+
+            if (!Screenings.Any())
+                Screenings = new BindingList<Screening>(DataGenerator.GenerateScreenings([.. Movies], Screens, 100));
         }
-
-        private static List<T> GetRandomElements<T>(T[] list)
-        {
-            var random = new Random();
-            var random2 = new Random();
-            var count = random2.Next(1, list.Count());
-            var result = new List<T>();
-            var indices = new HashSet<int>();
-
-            while (indices.Count < count)
-            {
-                int index = random.Next(list.Count());
-                if (indices.Add(index))
-                {
-                    result.Add(list[index]);
-                }
-            }
-
-            return result;
-        }
+        
 
         public static T Deserialize<T>(string file)
         {
-            using (Stream s = File.Open(file, FileMode.Open))
-            {
-                XmlSerializer x = new XmlSerializer(typeof(T));
-                return (T)x.Deserialize(s);
-            }
+            using Stream s = File.Open(file, FileMode.Open);
+            XmlSerializer x = new (typeof(T));
+            return (T)x.Deserialize(s)!;
         }
 
         public static void Serialize<T>(T data, string fileName)
         {
-            using (Stream s = File.Open(fileName, FileMode.Create))
-            {
-                XmlSerializer x = new XmlSerializer(data.GetType());
-                x.Serialize(s, data);
-            }
+            using Stream s = File.Open(fileName, FileMode.Create);
+            XmlSerializer x = new (data!.GetType());
+            x.Serialize(s, data);
         }
     }
 }

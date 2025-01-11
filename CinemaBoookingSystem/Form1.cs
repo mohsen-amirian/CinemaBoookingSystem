@@ -5,11 +5,11 @@ namespace CinemaBoookingSystem
 {
     public partial class Form1 : Form
     {
-        private BindingList<ScreeningViewModel> screeningGridSource = [];
         private BindingList<Seat> seatsListSource = [];
+        private BindingList<Screening> screeningGridSource = [];
 
-        private ScreeningViewModel? selectedScreening;
-        private Guid? selectedCustomerId;
+        private Screening? selectedScreening;
+        private Customer? selectedCustomer;
         public Form1()
         {
             InitializeComponent();
@@ -27,7 +27,7 @@ namespace CinemaBoookingSystem
 
         private void dgvCustomers_SelectionChanged(object sender, EventArgs e)
         {
-            selectedCustomerId = ((Customer)dgvCustomers.CurrentRow.DataBoundItem).Id;
+            selectedCustomer = (Customer)dgvCustomers.CurrentRow.DataBoundItem;
         }
 
         private void dgvMovies_SelectionChanged(object sender, EventArgs e)
@@ -35,16 +35,7 @@ namespace CinemaBoookingSystem
             screeningGridSource.Clear();
 
             var selectedMovieId = ((Movie)dgvMovies.CurrentRow.DataBoundItem).Id;
-            var screenings = Database.Screenings
-                .Where(x => x.MovieId == selectedMovieId)
-                .Select(s => new ScreeningViewModel()
-                {
-                    Id = s.Id,
-                    DateTime = s.DateTime,
-                    MovieId = s.MovieId,
-                    ScreenId = s.ScreenId,
-                    ScreenName = Database.Screens.Single(x => x.Id == s.ScreenId).Name,
-                });
+            var screenings = Database.Screenings.Where(x => x.Movie.Id == selectedMovieId);
 
             foreach (var screening in screenings)
                 screeningGridSource.Add(screening);
@@ -54,14 +45,14 @@ namespace CinemaBoookingSystem
         {
             if (!screeningGridSource.Any()) return;
 
-            selectedScreening = (ScreeningViewModel)dgvScreening.CurrentRow.DataBoundItem;
+            selectedScreening = (Screening)dgvScreening.CurrentRow.DataBoundItem;
             var takenSeatIds =
-                Database.Bookings.Where(b => b.ScreeningId == selectedScreening.Id)
-                .Select(b => b.SeatId)
+                Database.Bookings.Where(b => b.Screening.Id == selectedScreening.Id)
+                .Select(b => b.Seat.Id)
                 .ToList();
 
             var seats = Database.Screens
-                .Single(s => s.Id == selectedScreening.ScreenId).Seats
+                .Single(s => s.Id == selectedScreening.Screen.Id).Seats
                 .ExceptBy(takenSeatIds, s => s.Id).ToList();
 
             seatsListSource.Clear();
@@ -72,7 +63,7 @@ namespace CinemaBoookingSystem
         private void btnBook_Click(object sender, EventArgs e)
         {
             var selectedSeat = (Seat)lstbSeats.SelectedItem;
-            Database.Book(selectedCustomerId.Value, selectedScreening.Id, selectedSeat.Id);
+            Database.Book(selectedCustomer, selectedScreening, selectedSeat);
             seatsListSource.Remove(selectedSeat);
         }
 
