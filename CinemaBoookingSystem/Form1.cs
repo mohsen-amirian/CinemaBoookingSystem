@@ -49,18 +49,7 @@ namespace CinemaBoookingSystem
             if (!screeningGridSource.Any()) return;
 
             selectedScreening = (Screening)dgvScreening.CurrentRow.DataBoundItem;
-            var takenSeatIds =
-                Database.Bookings.Where(b => b.Screening.Id == selectedScreening.Id)
-                .Select(b => b.Seat.Id)
-                .ToList();
-
-            var seats = Database.Screens
-                .Single(s => s.Id == selectedScreening.Screen.Id).Seats
-                .ExceptBy(takenSeatIds, s => s.Id).ToList();
-
-            seatsListSource.Clear();
-            foreach (var seat in seats)
-                seatsListSource.Add(seat);
+            updateSeats(selectedScreening);
         }
 
         private void btnBook_Click(object sender, EventArgs e)
@@ -73,6 +62,27 @@ namespace CinemaBoookingSystem
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Database.Serialize();
+        }
+
+        private void btnCancelBooking_Click(object sender, EventArgs e)
+        {
+            var booking = (Booking)dgvBookings.CurrentRow.DataBoundItem;
+            Database.Bookings.Remove(booking);
+            updateSeats(booking.Screening);
+        }
+
+        private void updateSeats(Screening screening)
+        {
+            var takenSeatIds =
+                Database.Bookings.Where(b => b.Screening.Id == screening.Id)
+                .Select(b => b.Seat.Id)
+                .ToList();
+
+            var feeSeats = screening.Screen.Seats.ExceptBy(takenSeatIds, s => s.Id).ToList();
+
+            seatsListSource.Clear();
+            foreach (var seat in feeSeats)
+                seatsListSource.Add(seat);
         }
     }
 }

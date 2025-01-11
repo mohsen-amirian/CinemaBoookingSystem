@@ -52,6 +52,7 @@
             label2 = new Label();
             label1 = new Label();
             tabPage2 = new TabPage();
+            btnCancelBooking = new Button();
             dgvBookings = new DataGridView();
             Column12 = new DataGridViewTextBoxColumn();
             Column13 = new DataGridViewTextBoxColumn();
@@ -331,6 +332,7 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(btnCancelBooking);
             tabPage2.Controls.Add(dgvBookings);
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
@@ -340,16 +342,30 @@
             tabPage2.Text = "Manage Bookings";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // btnCancelBooking
+            // 
+            btnCancelBooking.Location = new Point(99, 463);
+            btnCancelBooking.Name = "btnCancelBooking";
+            btnCancelBooking.Size = new Size(165, 29);
+            btnCancelBooking.TabIndex = 1;
+            btnCancelBooking.Text = "Cancel Booking";
+            btnCancelBooking.UseVisualStyleBackColor = true;
+            btnCancelBooking.Click += btnCancelBooking_Click;
+            // 
             // dgvBookings
             // 
             dgvBookings.AllowUserToAddRows = false;
             dgvBookings.AllowUserToDeleteRows = false;
+            dgvBookings.AllowUserToResizeColumns = false;
+            dgvBookings.AllowUserToResizeRows = false;
             dgvBookings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvBookings.Columns.AddRange(new DataGridViewColumn[] { Column12, Column13, Column14, Column15, Column16, Column17 });
             dgvBookings.Location = new Point(99, 34);
+            dgvBookings.MultiSelect = false;
             dgvBookings.Name = "dgvBookings";
             dgvBookings.ReadOnly = true;
             dgvBookings.RowHeadersWidth = 51;
+            dgvBookings.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvBookings.Size = new Size(960, 342);
             dgvBookings.TabIndex = 0;
             // 
@@ -468,5 +484,6 @@
         private DataGridViewTextBoxColumn Column15;
         private DataGridViewTextBoxColumn Column16;
         private DataGridViewTextBoxColumn Column17;
+        private Button btnCancelBooking;
     }
 }
