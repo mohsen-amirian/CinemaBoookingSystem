@@ -1,7 +1,4 @@
-﻿using CinemaBoookingSystem.Model;
-using Screen = CinemaBoookingSystem.Model.Screen;
-
-namespace CinemaBoookingSystem.Data
+﻿namespace CinemaBoookingSystem.Data
 {
     public static class DataGenerator
     {

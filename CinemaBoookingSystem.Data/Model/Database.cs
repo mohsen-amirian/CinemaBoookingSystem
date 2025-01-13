@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Xml.Serialization;
 
-namespace CinemaBoookingSystem.Model
+namespace CinemaBoookingSystem.Data
 {
     public static class Database
     {
@@ -44,22 +44,6 @@ namespace CinemaBoookingSystem.Model
 
         public static bool CreateCustomer(string name, string lastName, int yearOfBirth, string email)
         {
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(lastName))
-            {
-                return false;
-            }
-
-            if (yearOfBirth < 1900 || yearOfBirth > DateTime.Now.Year)
-            {
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(email) || !email.Contains("@"))
-            {
-                return false;
-            }
-
-
             var newCustomer = new Customer
             {
                 Id = Guid.NewGuid(),

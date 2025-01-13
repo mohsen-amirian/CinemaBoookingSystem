@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace CinemaBoookingSystem.Model
+namespace CinemaBoookingSystem.Data
 {
     public class Booking()
     {

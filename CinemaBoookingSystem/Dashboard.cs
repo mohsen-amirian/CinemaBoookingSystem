@@ -1,4 +1,4 @@
-using CinemaBoookingSystem.Model;
+using CinemaBoookingSystem.Data;
 using System.ComponentModel;
 
 namespace CinemaBoookingSystem
