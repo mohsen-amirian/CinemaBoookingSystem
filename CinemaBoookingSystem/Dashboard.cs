@@ -58,8 +58,18 @@ namespace CinemaBoookingSystem
 
         private void btnBook_Click(object sender, EventArgs e)
         {
+            if (lstbSeats.SelectedItem == null)
+            {
+                MessageBox.Show(
+                    "Please select a seat to book.",
+                    "No Seat Selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
             var selectedSeat = (Seat)lstbSeats.SelectedItem;
-            Database.Book(selectedCustomer, selectedScreening, selectedSeat);
+            Database.Book(selectedCustomer!, selectedScreening!, selectedSeat);
             seatsListSource.Remove(selectedSeat);
 
             MessageBox.Show("Successfully booked.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -72,6 +82,16 @@ namespace CinemaBoookingSystem
 
         private void btnCancelBooking_Click(object sender, EventArgs e)
         {
+            if (dgvBookings.CurrentRow == null)
+            {
+                MessageBox.Show(
+                    "Please select a booking to cancel.",
+                    "No Booking Selected", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
             var booking = (Booking)dgvBookings.CurrentRow.DataBoundItem;
             Database.CancelBooking(booking);
             updateSeats(booking.Screening);
@@ -93,21 +113,40 @@ namespace CinemaBoookingSystem
 
         private void btnEditCustomer_Click(object sender, EventArgs e)
         {
+            if (dgvManageCustomers.CurrentRow == null)
+            {
+                MessageBox.Show(
+                    "Please select a customer to edit.",
+                    "No Customer Selected",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
             updatingCustomer = (Customer)dgvManageCustomers.CurrentRow.DataBoundItem;
             gbCustomerEdit.Enabled = true;
             txtEditCustomerName.Text = updatingCustomer.Name;
             txtEditCustomerLastName.Text = updatingCustomer.LastName;
             txtEditCustomerEmail.Text = updatingCustomer.Email;
             txtEditCustomerYOB.Text = updatingCustomer.YearOfBirth.ToString();
+
+            dgvManageCustomers.Enabled = false;
         }
 
         private void btnCustomerEditSave_Click(object sender, EventArgs e)
         {
+            if (!ValidateCustomerInput(
+                txtEditCustomerName,
+                txtEditCustomerLastName,
+                txtEditCustomerEmail,
+                txtEditCustomerYOB,
+                out int yearOfBirth)) return;
+
             Database.UpdateCustomer(
-                updatingCustomer.Id,
+                updatingCustomer!.Id,
                 txtEditCustomerName.Text,
                 txtEditCustomerLastName.Text,
-                int.Parse(txtEditCustomerYOB.Text),
+                yearOfBirth,
                 txtEditCustomerEmail.Text
                 );
 
@@ -129,10 +168,18 @@ namespace CinemaBoookingSystem
             txtEditCustomerEmail.Clear();
 
             gbCustomerEdit.Enabled = false;
+            dgvManageCustomers.Enabled = true;
         }
 
         private void btnCreateNewCustomer_Click(object sender, EventArgs e)
         {
+            if (!ValidateCustomerInput(
+                txtNewCustomerName,
+                txtNewCustomerLastName,
+                txtNewCustomerEmail,
+                txtNewCustomerYOB,
+                out int yearOfBirth)) return;
+
             Database.CreateCustomer(
                 txtNewCustomerName.Text,
                 txtNewCustomerLastName.Text,
@@ -146,6 +193,35 @@ namespace CinemaBoookingSystem
             txtNewCustomerLastName.Clear();
             txtNewCustomerEmail.Clear();
             txtNewCustomerYOB.Clear();
+        }
+
+        private bool ValidateCustomerInput(
+            TextBox nameTextBox, TextBox lastNameTextBox, TextBox emailTextBox, TextBox yobTextBox, out int yearOfBirth)
+        {
+            yearOfBirth = 0;
+
+            if (string.IsNullOrWhiteSpace(nameTextBox.Text) ||
+                string.IsNullOrWhiteSpace(lastNameTextBox.Text) ||
+                string.IsNullOrWhiteSpace(emailTextBox.Text) ||
+                string.IsNullOrWhiteSpace(yobTextBox.Text))
+            {
+                MessageBox.Show("Please ensure all fields are filled correctly:\n" +
+                                "- Name, Last Name, and Email should have values.\n" +
+                                "- Year of Birth must be a valid number.",
+                                "Validation Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (!int.TryParse(yobTextBox.Text, out yearOfBirth))
+            {
+                MessageBox.Show("Year of Birth must be a valid number.", "Validation Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true;
         }
 
         private void btnDeleteCustomer_Click(object sender, EventArgs e)

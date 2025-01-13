@@ -240,7 +240,7 @@
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(955, 803);
+            tabControl1.Size = new Size(982, 803);
             tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -253,7 +253,7 @@
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(947, 770);
+            tabPage1.Size = new Size(974, 770);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Reservation";
             tabPage1.UseVisualStyleBackColor = true;
@@ -777,8 +777,9 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(955, 803);
+            ClientSize = new Size(982, 803);
             Controls.Add(tabControl1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "Dashboard";
             Text = "Cinema Booking Dashboard";
             FormClosed += Form1_FormClosed;
