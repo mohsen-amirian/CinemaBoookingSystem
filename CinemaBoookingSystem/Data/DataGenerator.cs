@@ -5,7 +5,7 @@ namespace CinemaBoookingSystem.Data
 {
     public static class DataGenerator
     {
-        public static Customer[] GenerateCustomers(int count)
+        public static List<Customer> GenerateCustomers(int count)
         {
             string[] firstNames = { "John", "Jane", "Michael", "Sarah", "David", "Emily", "Robert", "Jessica", "Daniel", "Laura" };
             string[] lastNames = { "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez" };
@@ -30,10 +30,10 @@ namespace CinemaBoookingSystem.Data
                 });
             }
 
-            return customers.ToArray();
+            return customers;
         }
 
-        public static Movie[] GenerateMovies()
+        public static List<Movie> GenerateMovies()
         {
             string[] titles = { "Inception", "The Matrix", "Interstellar", "The Dark Knight", "Pulp Fiction", "Fight Club", "Forrest Gump", "The Shawshank Redemption", "The Godfather", "The Lord of the Rings" };
             string[] genres = { "Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Fantasy", "Thriller", "Romance" };
@@ -55,10 +55,10 @@ namespace CinemaBoookingSystem.Data
                 });
             }
 
-            return movies.ToArray();
+            return movies;
         }
 
-        public static Seat[] GenerateSeats(int count)
+        public static List<Seat> GenerateSeats(int count)
         {
             var seats = new List<Seat>();
             for (int i = 1; i <= count; i++)
@@ -69,7 +69,7 @@ namespace CinemaBoookingSystem.Data
                     Number = i
                 });
             }
-            return seats.ToArray();
+            return seats;
         }
 
         public static Screen[] GenerateScreens()
@@ -84,14 +84,14 @@ namespace CinemaBoookingSystem.Data
                 screens.Add(new Screen() {
                     Id = Guid.NewGuid(),
                     Name = screenNames[i],
-                    Seats = GenerateSeats(random.Next(50, 101))
+                    Seats = GenerateSeats(random.Next(50, 101)).ToArray()
                 });
             }
 
             return screens.ToArray();
         }
 
-        public static Screening[] GenerateScreenings(Movie[] movies, Screen[] screens, int count)
+        public static List<Screening> GenerateScreenings(Movie[] movies, Screen[] screens, int count)
         {
             var screenings = new List<Screening>();
             var random = new Random();
@@ -107,7 +107,7 @@ namespace CinemaBoookingSystem.Data
                 });
             }
 
-            return screenings.ToArray();
+            return screenings;
         }
     }
 }

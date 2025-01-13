@@ -6,11 +6,11 @@ namespace CinemaBoookingSystem.Model
 {
     public static class Database
     {
-        public static BindingList<Customer> Customers { get; private set; } = [];
-        public static BindingList<Movie> Movies { get; private set; } = [];
-        public static Screen[] Screens { get; private set; } = [];
-        public static BindingList<Screening> Screenings { get; private set; } = [];
-        public static BindingList<Booking> Bookings { get; private set; } = [];
+        public static BindingList<Customer> Customers { get; private set; } = new BindingList<Customer>();
+        public static BindingList<Movie> Movies { get; private set; } = new BindingList<Movie>();
+        public static Screen[] Screens { get; private set; } = Array.Empty<Screen>();
+        public static BindingList<Screening> Screenings { get; private set; } = new BindingList<Screening>();
+        public static BindingList<Booking> Bookings { get; private set; } = new BindingList<Booking>();
 
 
         static Database()
